@@ -17,9 +17,9 @@ const Navigation=()=>{
             <a class="link white-70 hover-white no-underline flex items-center pa3" href="">
                 <img src={brain} alt="logo" className="grow ma2" style={{padding:"2px",float:"left", height: 40, width: 40 }}/>
             </a>
-            <div class="flex-grow pa3 flex items-center">
-                <a class="f4 dib white dim mr3 mr4-ns ">Rank is #5</a>
-                <a class="f4 dib white bg-animate hover-bg-white hover-black no-underline pv2 ph4 br-pill ba b--white-20" href="#0">Sign Out</a>
+            <div className="flex-grow pa3 flex items-center">
+                <a className="f4 dib white dim mr3 mr4-ns ">Rank is #5</a>
+                <a className="f4 dib white bg-animate hover-bg-white hover-black no-underline pv2 ph4 br-pill ba b--white-20" href="#0">Sign Out</a>
             </div>
         </nav>
 

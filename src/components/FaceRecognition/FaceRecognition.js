@@ -1,14 +1,15 @@
 import React from 'react'
-
-const FaceRecognition=()=>{
+import './FaceRecognition.css';
+const FaceRecognition=({box,imageUrl})=>{
     return(
-        <div class="dt mw6 center pv4 pv5-m pv6-ns">
-            <div class="dtc v-mid">
-                <img src="https://samples.clarifai.com/demographics.jpg" alt="A bright blue sky" class="mw5" />
+        <div class="pt0">
+            <div class="ma4 ">
+                <img id="inputimage" src={imageUrl} alt="Face" style={{width:"300px",height:"auto", position: "absolute", zIndex: -1}} />
+                <canvas id="canvas" style={{zIndex:1}}></canvas>
             </div>
-            <div class="dtc v-mid pl3">
-                <p class="lh-copy white">
-                This text is vertically aligned middle, no matter what the height of the image is.
+            <div>
+                <p className="white" id="invisibletext" style={{visibility:"hidden"}}>
+                    Click on the box to know!
                 </p>
             </div>
         </div>
