@@ -76,10 +76,28 @@ class App extends Component {
       var x=this;
       (function(index){
         path.onClick=function(e){
-          console.log(x.state.faceInfo[index]);
-
+          console.log(x.state.faceInfo[index][0].vocab_id);
+          var age='';
+          var gender='';
+          var appearences=[];
+          for(var i=0;i<x.state.faceInfo[index].length;i++){
+              if(age==''){
+                  if(x.state.faceInfo[index][i].vocab_id=="age_appearance")
+                      age=x.state.faceInfo[index][i].name;
+              }
+              if(gender==''){
+                  if(x.state.faceInfo[index][i].vocab_id=="gender_appearance"){
+                      gender=x.state.faceInfo[index][i].name;
+                  }
+              }
+              if(x.state.faceInfo[index][i].vocab_id=="multicultural_appearance"){
+                  appearences.push(x.state.faceInfo[index][i].name);
+              }
+          }
           InfoModal.setVal(x.state.faceInfo[index]);
-          document.getElementById("age").innerHTML="Age:"+12;
+          document.getElementById("age").innerHTML="Age:"+age;
+          document.getElementById("gender").innerHTML="Gender:"+gender;
+          document.getElementById("appearences").innerHTML="Appearences:<br/><br/>"+appearences;
         }
       })(i);
       

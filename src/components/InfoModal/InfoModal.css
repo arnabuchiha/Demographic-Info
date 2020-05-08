@@ -20,4 +20,7 @@
     background: black;
     transform: translate3d(-50%, -25%, 0);
   }
-  
+p{
+    font-size: 22px;
+    font-weight: 100;
+}  
