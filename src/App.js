@@ -11,6 +11,8 @@ import { func } from 'prop-types';
 import paper from 'paper';
 import { blue } from 'color-name';
 import InfoModal from './components/InfoModal/InfoModal';
+import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 const app=new Clarifai.App({
   apiKey:"05ea648ab6874377a7384b185058ceb5"
 })
@@ -35,12 +37,13 @@ class App extends Component {
       box:{},
       clarifaiFaces: [],
       realFaces: [],
-      faceInfo:[]
+      faceInfo:[],
+      route:'signin'
     }
     
   }
-  modalRef=({handleShow})=>{
-    InfoModal.setVal=handleShow;
+  modalRef=(obj)=>{
+    InfoModal.setVal=obj&&obj.handleShow;
   }
   onInputChange=(event)=>{
     this.setState({
@@ -127,13 +130,21 @@ class App extends Component {
       console.log(this.state.faceInfo);
     }).catch(err=>console.log(err));
   }
+  onRouteChange=(route)=>{
+    this.setState({
+      route:route
+    })
+  }
   render(){
     return (
       <div className="App">
       <Particles className='particles'
             
           />
-        <Navigation/>
+        {
+          this.state.route==="home"?
+          <div>
+        <Navigation onRouteChange={this.onRouteChange}/>
         {/* <Logo/> */}
         <Rank/>
         <ImageLinkForm 
@@ -143,6 +154,12 @@ class App extends Component {
         
         <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
         <InfoModal ref={this.modalRef} faceInfo={this.state.faceInfo[0]}></InfoModal>
+        </div>:
+        (
+          this.state.route=="signin"?
+          <SignIn onRouteChange={this.onRouteChange}/>:<Register onRouteChange={this.onRouteChange}/>
+        )
+        }
       </div>
     );
   }
