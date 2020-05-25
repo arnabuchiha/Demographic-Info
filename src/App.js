@@ -13,6 +13,7 @@ import { blue } from 'color-name';
 import InfoModal from './components/InfoModal/InfoModal';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
+import axios from 'axios';
 const app=new Clarifai.App({
   apiKey:"05ea648ab6874377a7384b185058ceb5"
 })
@@ -103,13 +104,6 @@ class App extends Component {
           document.getElementById("appearences").innerHTML="Appearences:<br/><br/>"+appearences;
         }
       })(i);
-      
-      
-      // ctx.beginPath();
-      // ctx.lineWidth = "5";
-      // ctx.strokeStyle = "blue"; 
-      // ctx.rect(this.state.box.x,this.state.box.y,this.state.box.w,this.state.box.h);
-      // ctx.stroke();
     }
     paper.view.draw();
   }
@@ -128,7 +122,18 @@ class App extends Component {
       var temptext=document.getElementById("invisibletext");
       temptext.style.visibility="visible";
       console.log(this.state.faceInfo);
+      axios.post('https://facerecognition-backennd.herokuapp.com/api/rank',{
+          token:localStorage.getItem('jwt-token')
+        }).then(res=>{
+          console.log(res);
+            if(!res.data.success){
+              this.props.onRouteChange('signin');
+            }
+        }).catch(err=>{
+                console.log(err);
+        })
     }).catch(err=>console.log(err));
+    
   }
   onRouteChange=(route)=>{
     this.setState({
